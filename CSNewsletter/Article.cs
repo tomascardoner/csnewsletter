@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Data;
+using System.Data.OleDb;
 
 namespace CSNewsletter
 {
@@ -91,19 +93,20 @@ namespace CSNewsletter
                 }
             }
         }
-        public byte Order
+        public byte OrderNumber
         {
-            get => _order;
+            get => _orderNumber;
             set
             {
-                if (value != _order)
+                if (value != _orderNumber)
                 {
                     _isDirty = true;
-                    _order = value;
+                    _orderNumber = value;
                 }
             }
         }
 
+        public CardonerSistemas.Database_ADO_OleDb Database { get; set; }
         public bool IsNew => _isNew;
         public bool RaiseExceptionWhenNotMatch { get => _raiseExceptionWhenNotMatch; set => _raiseExceptionWhenNotMatch = value; }
         public bool NoMatch => _noMatch;
@@ -122,12 +125,18 @@ namespace CSNewsletter
         private string _body;
         private bool _photoGalleryUse;
         private string _photoGalleryID;
-        private byte _order;
+        private byte _orderNumber;
 
         #endregion
 
         public Article()
         {
+            InitializeValues();
+        }
+
+        public Article(ref CardonerSistemas.Database_ADO_OleDb database)
+        {
+            Database = database;
             InitializeValues();
         }
 
@@ -145,7 +154,7 @@ namespace CSNewsletter
             _body = "";
             _photoGalleryUse = false;
             _photoGalleryID = "";
-            _order = 0;
+            _orderNumber = 0;
         }
 
         public void MakeDirty()
@@ -154,32 +163,25 @@ namespace CSNewsletter
             return;
         }
 
-        public bool Load()
+        public bool Load(short newsletterID, string iD)
         {
             InitializeValues();
 
-            try
+            OleDbDataReader dataReader = null;
+
+            if (Database.OpenDataReader(ref dataReader, string.Format("SELECT * FROM NewsletterArticle WHERE NewsletterID = {0} AND ID = '{1}'", newsletterID, iD), CommandType.Text, CommandBehavior.SingleRow, string.Format("Error al leer el Artículo de la base de datos.{0}{0}NewsletterID: {1}{0}ID: {2}", Environment.NewLine, _newsletterID, _iD)))
             {
-                bool result;
-
-                // open command for read data
-                // open recordset
-                //result = GetDataFromRecordset();
-                result = true;
-
-                return result;
+                return GetDataFromRecordset(ref dataReader);
             }
-            catch (Exception ex)
+            else
             {
-                CardonerSistemas.Error.ProcessError(ref ex, string.Format("Error al leer el Artículo de la base de datos.{0}{0}NewsletterID: {1}{0}ID: {1}", Environment.NewLine, _newsletterID, _iD));
                 return false;
             }
-
         }
 
-        public bool GetDataFromRecordset(ref System.Data.OleDb.OleDbDataReader drData)
+        public bool GetDataFromRecordset(ref OleDbDataReader dataReader)
         {
-            if (!_raiseExceptionWhenNotMatch && !drData.HasRows)
+            if (!_raiseExceptionWhenNotMatch && !dataReader.HasRows)
             {
                 _noMatch = true;
                 return true;
@@ -192,21 +194,21 @@ namespace CSNewsletter
 
                 try
                 {
-                    drData.Read();
-                    _newsletterID = Convert.ToInt16 (drData["NewsletterID"]);
-                    _iD = drData["ID"].ToString();
-                    _title = drData["Title"].ToString();
-                    _imageName = drData["ImageName"].ToString();
-                    _body = drData["Body"].ToString();
-                    _photoGalleryUse = Convert.ToBoolean(drData["PhotoGalleryUse"]);
-                    _photoGalleryID = drData["PhotoGalleryID"].ToString();
-                    _order = Convert.ToByte(drData["Order"]);
+                    dataReader.Read();
+                    _newsletterID = Convert.ToInt16 (dataReader["NewsletterID"]);
+                    _iD = dataReader["ID"].ToString();
+                    _title = dataReader["Title"].ToString();
+                    _imageName = dataReader["ImageName"].ToString();
+                    _body = dataReader["Body"].ToString();
+                    _photoGalleryUse = Convert.ToBoolean(dataReader["PhotoGalleryUse"]);
+                    _photoGalleryID = dataReader["PhotoGalleryID"].ToString();
+                    _orderNumber = (dataReader["OrderNumber"] == System.DBNull.Value ? Convert.ToByte(0) : Convert.ToByte(dataReader["OrderNumber"]));
 
                     return true;
                 }
                 catch (Exception ex)
                 {
-                    CardonerSistemas.Error.ProcessError(ref ex, string.Format("Error al obtener los datos del Artículo.{0}{0}NewsletterID: {1}{0}ID: {1}", Environment.NewLine, _newsletterID, _iD));
+                    CardonerSistemas.Error.ProcessError(ref ex, string.Format("Error al obtener los datos del Artículo.{0}{0}NewsletterID: {1}{0}ID: {2}", Environment.NewLine, _newsletterID, _iD));
                     return false;
                 }
             }
@@ -214,7 +216,7 @@ namespace CSNewsletter
 
         public bool Copy()
         {
-            if (Load())
+            if (Load(_newsletterID, _iD))
             {
                 _isNew = true;
                 _isDirty = true;
@@ -234,26 +236,53 @@ namespace CSNewsletter
 
             try
             {
+                OleDbDataAdapter dataAdapter = new OleDbDataAdapter();
+                DataSet dataSet = null;
+                if (Database.OpenDataSet(ref dataAdapter, ref dataSet, string.Format("SELECT * FROM NewsletterArticle WHERE NewsletterID = {0} AND ID = '{1}'", _newsletterID, _iD), "NewsletterArticle", string.Format("Error al obtener el Artículo de la Base de Datos.{0}{0}NewsletterID: {1}{0}ID: {1}", Environment.NewLine, _newsletterID, _iD)))
+                {
+                    DataRow dataRow = null;
+                    if (_isNew)
+                    {
+                        dataRow = dataSet.Tables["NewsletterArticle"].NewRow();
+                        dataRow["NewsletterID"] = _newsletterID;
+                    }
+                    else
+                    {
+                        dataRow = dataSet.Tables["NewsletterArticle"].Rows[0];
+                    }
+                    dataRow["ID"] = _iD;
+                    dataRow["Title"] = _title.Trim().Length == 0 ? null : _title.Trim();
+                    dataRow["Body"] = _body.Trim().Length == 0 ? null : _body.Trim();
+                    dataRow["ImageName"] = _imageName.Trim().Length == 0 ? null : _imageName.Trim();
+                    dataRow["PhotoGalleryUse"] = _photoGalleryUse;
+                    dataRow["PhotoGalleryID"] = _photoGalleryID.Trim().Length == 0 ? null : _photoGalleryID.Trim();
+                    if (_orderNumber == 0)
+                    {
+                        dataRow["OrderNumber"] = DBNull.Value;
+                    }
+                    else
+                    {
+                        dataRow["OrderNumber"] = _orderNumber;
+                    }
+
+                    if (_isNew)
+                    {
+                        dataSet.Tables["NewsletterArticle"].Rows.Add(dataRow);
+                    }
+                    dataAdapter.Update(dataSet, "NewsletterArticle");
+                }
                 return true;
             }
             catch (Exception ex)
             {
-                CardonerSistemas.Error.ProcessError(ref ex, string.Format("Error al actualizar los datos del Artículo.{0}{0}NewsletterID: {1}{0}ID: {1}", Environment.NewLine, _newsletterID, _iD));
+                CardonerSistemas.Error.ProcessError(ref ex, string.Format("Error al actualizar los datos del Artículo.{0}{0}NewsletterID: {1}{0}ID: {2}", Environment.NewLine, _newsletterID, _iD));
                 return false;
             }
         }
 
         public bool Delete()
         {
-            try
-            {
-                return true;
-            }
-            catch (Exception ex)
-            {
-                CardonerSistemas.Error.ProcessError(ref ex, string.Format("Error al eliminar los datos del Artículo.{0}{0}NewsletterID: {1}{0}ID: {1}", Environment.NewLine, _newsletterID, _iD));
-                return false;
-            }
+            return Database.Execute(string.Format("DELETE FROM NewsletterArticle WHERE NewsletterID = {0} AND ID = '{1}'", _newsletterID, _iD), CommandType.Text, string.Format("Error al eliminar los datos del Artículo.{0}{0}NewsletterID: {1}{0}ID: {2}", Environment.NewLine, _newsletterID, _iD));
         }
     }
 }

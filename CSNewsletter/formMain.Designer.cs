@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formMain));
             this.planelSplit = new System.Windows.Forms.SplitContainer();
             this.panelLeft = new System.Windows.Forms.TableLayoutPanel();
             this.listboxArticles = new System.Windows.Forms.ListBox();
@@ -42,8 +43,8 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOk = new System.Windows.Forms.Button();
             this.buttonImageName = new System.Windows.Forms.Button();
-            this.updownOrder = new System.Windows.Forms.NumericUpDown();
-            this.labelOrder = new System.Windows.Forms.Label();
+            this.updownOrderNumber = new System.Windows.Forms.NumericUpDown();
+            this.labelOrderNumber = new System.Windows.Forms.Label();
             this.labelPhotoGalleryID = new System.Windows.Forms.Label();
             this.textboxPhotoGalleryID = new System.Windows.Forms.TextBox();
             this.checkboxPhotoGalleryUse = new System.Windows.Forms.CheckBox();
@@ -63,7 +64,7 @@
             this.planelSplit.SuspendLayout();
             this.panelLeft.SuspendLayout();
             this.panelArticlesButtons.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.updownOrder)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.updownOrderNumber)).BeginInit();
             this.SuspendLayout();
             // 
             // planelSplit
@@ -72,7 +73,7 @@
             this.planelSplit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.planelSplit.FixedPanel = System.Windows.Forms.FixedPanel.Panel1;
             this.planelSplit.Location = new System.Drawing.Point(0, 0);
-            this.planelSplit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.planelSplit.Margin = new System.Windows.Forms.Padding(2);
             this.planelSplit.Name = "planelSplit";
             // 
             // planelSplit.Panel1
@@ -84,8 +85,8 @@
             this.planelSplit.Panel2.Controls.Add(this.buttonCancel);
             this.planelSplit.Panel2.Controls.Add(this.buttonOk);
             this.planelSplit.Panel2.Controls.Add(this.buttonImageName);
-            this.planelSplit.Panel2.Controls.Add(this.updownOrder);
-            this.planelSplit.Panel2.Controls.Add(this.labelOrder);
+            this.planelSplit.Panel2.Controls.Add(this.updownOrderNumber);
+            this.planelSplit.Panel2.Controls.Add(this.labelOrderNumber);
             this.planelSplit.Panel2.Controls.Add(this.labelPhotoGalleryID);
             this.planelSplit.Panel2.Controls.Add(this.textboxPhotoGalleryID);
             this.planelSplit.Panel2.Controls.Add(this.checkboxPhotoGalleryUse);
@@ -98,9 +99,9 @@
             this.planelSplit.Panel2.Controls.Add(this.labelTitulo);
             this.planelSplit.Panel2.Controls.Add(this.textboxArticleID);
             this.planelSplit.Panel2.Controls.Add(this.labelID);
-            this.planelSplit.Size = new System.Drawing.Size(983, 450);
+            this.planelSplit.Size = new System.Drawing.Size(650, 366);
             this.planelSplit.SplitterDistance = 266;
-            this.planelSplit.SplitterWidth = 8;
+            this.planelSplit.SplitterWidth = 6;
             this.planelSplit.TabIndex = 4;
             // 
             // panelLeft
@@ -115,7 +116,7 @@
             this.panelLeft.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelLeft.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.FixedSize;
             this.panelLeft.Location = new System.Drawing.Point(0, 0);
-            this.panelLeft.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelLeft.Margin = new System.Windows.Forms.Padding(2);
             this.panelLeft.Name = "panelLeft";
             this.panelLeft.RowCount = 5;
             this.panelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle());
@@ -123,28 +124,27 @@
             this.panelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.panelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.panelLeft.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.panelLeft.Size = new System.Drawing.Size(264, 448);
+            this.panelLeft.Size = new System.Drawing.Size(264, 364);
             this.panelLeft.TabIndex = 0;
             // 
             // listboxArticles
             // 
             this.listboxArticles.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listboxArticles.FormattingEnabled = true;
-            this.listboxArticles.ItemHeight = 16;
-            this.listboxArticles.Location = new System.Drawing.Point(3, 84);
-            this.listboxArticles.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.listboxArticles.Location = new System.Drawing.Point(2, 69);
+            this.listboxArticles.Margin = new System.Windows.Forms.Padding(2);
             this.listboxArticles.Name = "listboxArticles";
-            this.listboxArticles.Size = new System.Drawing.Size(258, 286);
+            this.listboxArticles.Size = new System.Drawing.Size(260, 229);
             this.listboxArticles.TabIndex = 3;
-            this.listboxArticles.SelectedIndexChanged += new System.EventHandler(this.ArticlesSelectionChange);
+            this.listboxArticles.SelectedIndexChanged += new System.EventHandler(this.ArticleChange);
             // 
             // labelArticles
             // 
             this.labelArticles.AutoSize = true;
-            this.labelArticles.Location = new System.Drawing.Point(5, 60);
-            this.labelArticles.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.labelArticles.Location = new System.Drawing.Point(4, 50);
+            this.labelArticles.Margin = new System.Windows.Forms.Padding(4);
             this.labelArticles.Name = "labelArticles";
-            this.labelArticles.Size = new System.Drawing.Size(66, 17);
+            this.labelArticles.Size = new System.Drawing.Size(52, 13);
             this.labelArticles.TabIndex = 2;
             this.labelArticles.Text = "Artículos:";
             // 
@@ -154,20 +154,20 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.comboboxNewsletter.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboboxNewsletter.FormattingEnabled = true;
-            this.comboboxNewsletter.Location = new System.Drawing.Point(3, 29);
-            this.comboboxNewsletter.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboboxNewsletter.Location = new System.Drawing.Point(2, 23);
+            this.comboboxNewsletter.Margin = new System.Windows.Forms.Padding(2);
             this.comboboxNewsletter.Name = "comboboxNewsletter";
-            this.comboboxNewsletter.Size = new System.Drawing.Size(258, 24);
+            this.comboboxNewsletter.Size = new System.Drawing.Size(260, 21);
             this.comboboxNewsletter.TabIndex = 1;
             this.comboboxNewsletter.SelectedIndexChanged += new System.EventHandler(this.NewsletterChange);
             // 
             // labelNewsletter
             // 
             this.labelNewsletter.AutoSize = true;
-            this.labelNewsletter.Location = new System.Drawing.Point(5, 5);
-            this.labelNewsletter.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.labelNewsletter.Location = new System.Drawing.Point(4, 4);
+            this.labelNewsletter.Margin = new System.Windows.Forms.Padding(4);
             this.labelNewsletter.Name = "labelNewsletter";
-            this.labelNewsletter.Size = new System.Drawing.Size(78, 17);
+            this.labelNewsletter.Size = new System.Drawing.Size(60, 13);
             this.labelNewsletter.TabIndex = 0;
             this.labelNewsletter.Text = "Newsletter:";
             // 
@@ -180,20 +180,20 @@
             this.panelArticlesButtons.Controls.Add(this.buttonArticleEdit);
             this.panelArticlesButtons.Controls.Add(this.buttonArticleDelete);
             this.panelArticlesButtons.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panelArticlesButtons.Location = new System.Drawing.Point(3, 374);
-            this.panelArticlesButtons.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panelArticlesButtons.Location = new System.Drawing.Point(2, 302);
+            this.panelArticlesButtons.Margin = new System.Windows.Forms.Padding(2);
             this.panelArticlesButtons.Name = "panelArticlesButtons";
-            this.panelArticlesButtons.Size = new System.Drawing.Size(258, 72);
+            this.panelArticlesButtons.Size = new System.Drawing.Size(260, 60);
             this.panelArticlesButtons.TabIndex = 4;
             // 
             // buttonArticleAdd
             // 
             this.buttonArticleAdd.AutoSize = true;
             this.buttonArticleAdd.Image = global::CSNewsletter.Properties.Resources.ADD;
-            this.buttonArticleAdd.Location = new System.Drawing.Point(3, 2);
-            this.buttonArticleAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonArticleAdd.Location = new System.Drawing.Point(2, 2);
+            this.buttonArticleAdd.Margin = new System.Windows.Forms.Padding(2);
             this.buttonArticleAdd.Name = "buttonArticleAdd";
-            this.buttonArticleAdd.Size = new System.Drawing.Size(72, 66);
+            this.buttonArticleAdd.Size = new System.Drawing.Size(54, 54);
             this.buttonArticleAdd.TabIndex = 0;
             this.tooltipMain.SetToolTip(this.buttonArticleAdd, "Agregar artículo");
             this.buttonArticleAdd.UseVisualStyleBackColor = true;
@@ -203,10 +203,10 @@
             // 
             this.buttonArticleEdit.AutoSize = true;
             this.buttonArticleEdit.Image = global::CSNewsletter.Properties.Resources.EDIT;
-            this.buttonArticleEdit.Location = new System.Drawing.Point(81, 2);
-            this.buttonArticleEdit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonArticleEdit.Location = new System.Drawing.Point(60, 2);
+            this.buttonArticleEdit.Margin = new System.Windows.Forms.Padding(2);
             this.buttonArticleEdit.Name = "buttonArticleEdit";
-            this.buttonArticleEdit.Size = new System.Drawing.Size(72, 66);
+            this.buttonArticleEdit.Size = new System.Drawing.Size(54, 54);
             this.buttonArticleEdit.TabIndex = 1;
             this.tooltipMain.SetToolTip(this.buttonArticleEdit, "Editar artículo");
             this.buttonArticleEdit.UseVisualStyleBackColor = true;
@@ -216,10 +216,10 @@
             // 
             this.buttonArticleDelete.AutoSize = true;
             this.buttonArticleDelete.Image = global::CSNewsletter.Properties.Resources.DELETE;
-            this.buttonArticleDelete.Location = new System.Drawing.Point(159, 2);
-            this.buttonArticleDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonArticleDelete.Location = new System.Drawing.Point(118, 2);
+            this.buttonArticleDelete.Margin = new System.Windows.Forms.Padding(2);
             this.buttonArticleDelete.Name = "buttonArticleDelete";
-            this.buttonArticleDelete.Size = new System.Drawing.Size(72, 66);
+            this.buttonArticleDelete.Size = new System.Drawing.Size(54, 54);
             this.buttonArticleDelete.TabIndex = 2;
             this.tooltipMain.SetToolTip(this.buttonArticleDelete, "Eliminar artículo");
             this.buttonArticleDelete.UseVisualStyleBackColor = true;
@@ -229,83 +229,87 @@
             // 
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.AutoSize = true;
+            this.buttonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.buttonCancel.Image = global::CSNewsletter.Properties.Resources.CANCEL;
-            this.buttonCancel.Location = new System.Drawing.Point(625, 377);
-            this.buttonCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonCancel.Location = new System.Drawing.Point(308, 305);
+            this.buttonCancel.Margin = new System.Windows.Forms.Padding(2);
             this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(72, 66);
+            this.buttonCancel.Size = new System.Drawing.Size(54, 54);
             this.buttonCancel.TabIndex = 16;
             this.tooltipMain.SetToolTip(this.buttonCancel, "Agregar artículo");
             this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.CancelClick);
             // 
             // buttonOk
             // 
             this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.buttonOk.AutoSize = true;
             this.buttonOk.Image = global::CSNewsletter.Properties.Resources.OK;
-            this.buttonOk.Location = new System.Drawing.Point(5, 377);
-            this.buttonOk.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonOk.Location = new System.Drawing.Point(4, 306);
+            this.buttonOk.Margin = new System.Windows.Forms.Padding(2);
             this.buttonOk.Name = "buttonOk";
-            this.buttonOk.Size = new System.Drawing.Size(72, 66);
+            this.buttonOk.Size = new System.Drawing.Size(54, 54);
             this.buttonOk.TabIndex = 15;
             this.tooltipMain.SetToolTip(this.buttonOk, "Agregar artículo");
             this.buttonOk.UseVisualStyleBackColor = true;
+            this.buttonOk.Click += new System.EventHandler(this.OkClick);
             // 
             // buttonImageName
             // 
             this.buttonImageName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.buttonImageName.Location = new System.Drawing.Point(657, 63);
-            this.buttonImageName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.buttonImageName.Location = new System.Drawing.Point(337, 52);
+            this.buttonImageName.Margin = new System.Windows.Forms.Padding(2);
             this.buttonImageName.Name = "buttonImageName";
-            this.buttonImageName.Size = new System.Drawing.Size(29, 25);
+            this.buttonImageName.Size = new System.Drawing.Size(24, 20);
             this.buttonImageName.TabIndex = 6;
             this.buttonImageName.Text = "...";
             this.tooltipMain.SetToolTip(this.buttonImageName, "Examinar...");
             this.buttonImageName.UseVisualStyleBackColor = true;
             // 
-            // updownOrder
+            // updownOrderNumber
             // 
-            this.updownOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.updownOrder.Location = new System.Drawing.Point(68, 327);
-            this.updownOrder.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.updownOrder.Maximum = new decimal(new int[] {
+            this.updownOrderNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.updownOrderNumber.Location = new System.Drawing.Point(51, 266);
+            this.updownOrderNumber.Maximum = new decimal(new int[] {
             255,
             0,
             0,
             0});
-            this.updownOrder.Name = "updownOrder";
-            this.updownOrder.Size = new System.Drawing.Size(76, 22);
-            this.updownOrder.TabIndex = 14;
-            this.updownOrder.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.updownOrderNumber.Name = "updownOrderNumber";
+            this.updownOrderNumber.Size = new System.Drawing.Size(57, 20);
+            this.updownOrderNumber.TabIndex = 14;
+            this.updownOrderNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // labelOrder
+            // labelOrderNumber
             // 
-            this.labelOrder.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.labelOrder.AutoSize = true;
-            this.labelOrder.Location = new System.Drawing.Point(3, 330);
-            this.labelOrder.Name = "labelOrder";
-            this.labelOrder.Size = new System.Drawing.Size(52, 17);
-            this.labelOrder.TabIndex = 13;
-            this.labelOrder.Text = "Orden:";
+            this.labelOrderNumber.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelOrderNumber.AutoSize = true;
+            this.labelOrderNumber.Location = new System.Drawing.Point(2, 268);
+            this.labelOrderNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.labelOrderNumber.Name = "labelOrderNumber";
+            this.labelOrderNumber.Size = new System.Drawing.Size(39, 13);
+            this.labelOrderNumber.TabIndex = 13;
+            this.labelOrderNumber.Text = "Orden:";
             // 
             // labelPhotoGalleryID
             // 
             this.labelPhotoGalleryID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelPhotoGalleryID.AutoSize = true;
-            this.labelPhotoGalleryID.Location = new System.Drawing.Point(172, 298);
+            this.labelPhotoGalleryID.Location = new System.Drawing.Point(129, 242);
+            this.labelPhotoGalleryID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPhotoGalleryID.Name = "labelPhotoGalleryID";
-            this.labelPhotoGalleryID.Size = new System.Drawing.Size(25, 17);
+            this.labelPhotoGalleryID.Size = new System.Drawing.Size(21, 13);
             this.labelPhotoGalleryID.TabIndex = 11;
             this.labelPhotoGalleryID.Text = "ID:";
             // 
             // textboxPhotoGalleryID
             // 
             this.textboxPhotoGalleryID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.textboxPhotoGalleryID.Location = new System.Drawing.Point(205, 294);
-            this.textboxPhotoGalleryID.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textboxPhotoGalleryID.Location = new System.Drawing.Point(154, 239);
+            this.textboxPhotoGalleryID.Margin = new System.Windows.Forms.Padding(2);
             this.textboxPhotoGalleryID.MaxLength = 100;
             this.textboxPhotoGalleryID.Name = "textboxPhotoGalleryID";
-            this.textboxPhotoGalleryID.Size = new System.Drawing.Size(284, 22);
+            this.textboxPhotoGalleryID.Size = new System.Drawing.Size(214, 20);
             this.textboxPhotoGalleryID.TabIndex = 12;
             this.tooltipMain.SetToolTip(this.textboxPhotoGalleryID, "Ingrese un texto para identificar el artículo. Este texto es de uso interno y no " +
         "se muestra en la Newsletter.\r\nEjemplo: \"diafamilia\".");
@@ -315,10 +319,9 @@
             // 
             this.checkboxPhotoGalleryUse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.checkboxPhotoGalleryUse.AutoSize = true;
-            this.checkboxPhotoGalleryUse.Location = new System.Drawing.Point(124, 298);
-            this.checkboxPhotoGalleryUse.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkboxPhotoGalleryUse.Location = new System.Drawing.Point(93, 242);
             this.checkboxPhotoGalleryUse.Name = "checkboxPhotoGalleryUse";
-            this.checkboxPhotoGalleryUse.Size = new System.Drawing.Size(18, 17);
+            this.checkboxPhotoGalleryUse.Size = new System.Drawing.Size(15, 14);
             this.checkboxPhotoGalleryUse.TabIndex = 10;
             this.checkboxPhotoGalleryUse.UseVisualStyleBackColor = true;
             // 
@@ -326,9 +329,10 @@
             // 
             this.labelPhotoGalleryUse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.labelPhotoGalleryUse.AutoSize = true;
-            this.labelPhotoGalleryUse.Location = new System.Drawing.Point(3, 298);
+            this.labelPhotoGalleryUse.Location = new System.Drawing.Point(2, 242);
+            this.labelPhotoGalleryUse.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelPhotoGalleryUse.Name = "labelPhotoGalleryUse";
-            this.labelPhotoGalleryUse.Size = new System.Drawing.Size(113, 17);
+            this.labelPhotoGalleryUse.Size = new System.Drawing.Size(86, 13);
             this.labelPhotoGalleryUse.TabIndex = 9;
             this.labelPhotoGalleryUse.Text = "Galería de fotos:";
             // 
@@ -337,22 +341,24 @@
             this.textboxBody.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textboxBody.Location = new System.Drawing.Point(68, 94);
-            this.textboxBody.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textboxBody.Location = new System.Drawing.Point(51, 76);
+            this.textboxBody.Margin = new System.Windows.Forms.Padding(2);
             this.textboxBody.MaxLength = 0;
             this.textboxBody.Multiline = true;
             this.textboxBody.Name = "textboxBody";
             this.textboxBody.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textboxBody.Size = new System.Drawing.Size(617, 173);
+            this.textboxBody.Size = new System.Drawing.Size(309, 141);
             this.textboxBody.TabIndex = 8;
-            this.textboxBody.Enter += new System.EventHandler(this.TextboxsGotFocus);
+            this.textboxBody.Enter += new System.EventHandler(this.BodyFocusEnter);
+            this.textboxBody.Leave += new System.EventHandler(this.BodyFocusLeave);
             // 
             // labelBody
             // 
             this.labelBody.AutoSize = true;
-            this.labelBody.Location = new System.Drawing.Point(3, 97);
+            this.labelBody.Location = new System.Drawing.Point(2, 79);
+            this.labelBody.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelBody.Name = "labelBody";
-            this.labelBody.Size = new System.Drawing.Size(47, 17);
+            this.labelBody.Size = new System.Drawing.Size(37, 13);
             this.labelBody.TabIndex = 7;
             this.labelBody.Text = "Texto:";
             // 
@@ -360,20 +366,21 @@
             // 
             this.textboxImageName.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textboxImageName.Location = new System.Drawing.Point(68, 64);
-            this.textboxImageName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textboxImageName.Location = new System.Drawing.Point(51, 52);
+            this.textboxImageName.Margin = new System.Windows.Forms.Padding(2);
             this.textboxImageName.MaxLength = 255;
             this.textboxImageName.Name = "textboxImageName";
-            this.textboxImageName.Size = new System.Drawing.Size(582, 22);
+            this.textboxImageName.Size = new System.Drawing.Size(282, 20);
             this.textboxImageName.TabIndex = 5;
             this.textboxImageName.Enter += new System.EventHandler(this.TextboxsGotFocus);
             // 
             // labelImageName
             // 
             this.labelImageName.AutoSize = true;
-            this.labelImageName.Location = new System.Drawing.Point(3, 68);
+            this.labelImageName.Location = new System.Drawing.Point(2, 55);
+            this.labelImageName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelImageName.Name = "labelImageName";
-            this.labelImageName.Size = new System.Drawing.Size(58, 17);
+            this.labelImageName.Size = new System.Drawing.Size(45, 13);
             this.labelImageName.TabIndex = 4;
             this.labelImageName.Text = "Imágen:";
             // 
@@ -381,30 +388,31 @@
             // 
             this.textboxTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textboxTitle.Location = new System.Drawing.Point(68, 34);
-            this.textboxTitle.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textboxTitle.Location = new System.Drawing.Point(51, 28);
+            this.textboxTitle.Margin = new System.Windows.Forms.Padding(2);
             this.textboxTitle.MaxLength = 255;
             this.textboxTitle.Name = "textboxTitle";
-            this.textboxTitle.Size = new System.Drawing.Size(617, 22);
+            this.textboxTitle.Size = new System.Drawing.Size(309, 20);
             this.textboxTitle.TabIndex = 3;
             this.textboxTitle.Enter += new System.EventHandler(this.TextboxsGotFocus);
             // 
             // labelTitulo
             // 
             this.labelTitulo.AutoSize = true;
-            this.labelTitulo.Location = new System.Drawing.Point(3, 38);
+            this.labelTitulo.Location = new System.Drawing.Point(2, 31);
+            this.labelTitulo.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelTitulo.Name = "labelTitulo";
-            this.labelTitulo.Size = new System.Drawing.Size(47, 17);
+            this.labelTitulo.Size = new System.Drawing.Size(38, 13);
             this.labelTitulo.TabIndex = 2;
             this.labelTitulo.Text = "Título:";
             // 
             // textboxArticleID
             // 
-            this.textboxArticleID.Location = new System.Drawing.Point(68, 5);
-            this.textboxArticleID.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.textboxArticleID.Location = new System.Drawing.Point(51, 4);
+            this.textboxArticleID.Margin = new System.Windows.Forms.Padding(2);
             this.textboxArticleID.MaxLength = 100;
             this.textboxArticleID.Name = "textboxArticleID";
-            this.textboxArticleID.Size = new System.Drawing.Size(284, 22);
+            this.textboxArticleID.Size = new System.Drawing.Size(214, 20);
             this.textboxArticleID.TabIndex = 1;
             this.tooltipMain.SetToolTip(this.textboxArticleID, "Ingrese un texto para identificar el artículo. Este texto es de uso interno y no " +
         "se muestra en la Newsletter.\r\nEjemplo: \"diafamilia\".");
@@ -413,19 +421,23 @@
             // labelID
             // 
             this.labelID.AutoSize = true;
-            this.labelID.Location = new System.Drawing.Point(3, 7);
+            this.labelID.Location = new System.Drawing.Point(2, 6);
+            this.labelID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.labelID.Name = "labelID";
-            this.labelID.Size = new System.Drawing.Size(25, 17);
+            this.labelID.Size = new System.Drawing.Size(21, 13);
             this.labelID.TabIndex = 0;
             this.labelID.Text = "ID:";
             // 
             // formMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AcceptButton = this.buttonOk;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(983, 450);
+            this.CancelButton = this.buttonCancel;
+            this.ClientSize = new System.Drawing.Size(650, 366);
             this.Controls.Add(this.planelSplit);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "formMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AppTitle";
@@ -439,7 +451,7 @@
             this.panelLeft.PerformLayout();
             this.panelArticlesButtons.ResumeLayout(false);
             this.panelArticlesButtons.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.updownOrder)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.updownOrderNumber)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -469,8 +481,8 @@
         private System.Windows.Forms.Label labelPhotoGalleryUse;
         private System.Windows.Forms.TextBox textboxPhotoGalleryID;
         private System.Windows.Forms.Label labelPhotoGalleryID;
-        private System.Windows.Forms.NumericUpDown updownOrder;
-        private System.Windows.Forms.Label labelOrder;
+        private System.Windows.Forms.NumericUpDown updownOrderNumber;
+        private System.Windows.Forms.Label labelOrderNumber;
         private System.Windows.Forms.Button buttonImageName;
         private System.Windows.Forms.Button buttonCancel;
         private System.Windows.Forms.Button buttonOk;

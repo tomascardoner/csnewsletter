@@ -37,6 +37,9 @@
   <PropertyGroup>
     <StartupObject>CSNewsletter.Program</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Application.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -115,19 +118,22 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Actions-document-new-icon %285%29.png" />
+    <None Include="Resources\new-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Actions-document-edit-icon %285%29.png" />
+    <None Include="Resources\edit-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Actions-edit-delete-icon %285%29.png" />
+    <None Include="Resources\delete-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Actions-dialog-ok-apply-icon %285%29.png" />
+    <None Include="Resources\ok-icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\Actions-dialog-cancel-icon %285%29.png" />
+    <None Include="Resources\cancel-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Application.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
