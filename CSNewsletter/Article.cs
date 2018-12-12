@@ -4,9 +4,9 @@ using System.Data.OleDb;
 
 namespace CSNewsletter
 {
-    class Article
+    internal class Article
     {
-        #region "Declarations"
+        #region Declarations
 
         // Public properties
         public short NewsletterID
@@ -21,6 +21,7 @@ namespace CSNewsletter
                 }
             }
         }
+
         public string ID
         {
             get => _iD;
@@ -33,6 +34,7 @@ namespace CSNewsletter
                 }
             }
         }
+
         public string Title
         {
             get => _title;
@@ -45,6 +47,7 @@ namespace CSNewsletter
                 }
             }
         }
+
         public string ImageName
         {
             get => _imageName;
@@ -57,6 +60,7 @@ namespace CSNewsletter
                 }
             }
         }
+
         public string Body
         {
             get => _body;
@@ -69,6 +73,7 @@ namespace CSNewsletter
                 }
             }
         }
+
         public bool PhotoGalleryUse
         {
             get => _photoGalleryUse;
@@ -81,6 +86,7 @@ namespace CSNewsletter
                 }
             }
         }
+
         public string PhotoGalleryID
         {
             get => _photoGalleryID;
@@ -93,6 +99,7 @@ namespace CSNewsletter
                 }
             }
         }
+
         public byte OrderNumber
         {
             get => _orderNumber;
@@ -113,12 +120,14 @@ namespace CSNewsletter
 
         // Internal variables
         private bool _isNew;
+
         private bool _isDirty;
         private bool _raiseExceptionWhenNotMatch;
         private bool _noMatch;
 
         // Properties variables
         private short _newsletterID;
+
         private string _iD;
         private string _title;
         private string _imageName;
@@ -127,7 +136,9 @@ namespace CSNewsletter
         private string _photoGalleryID;
         private byte _orderNumber;
 
-        #endregion
+        #endregion Declarations
+
+        #region Initialization
 
         public Article()
         {
@@ -156,6 +167,10 @@ namespace CSNewsletter
             _photoGalleryID = "";
             _orderNumber = 0;
         }
+
+        #endregion Initialization
+
+        #region Methods
 
         public void MakeDirty()
         {
@@ -195,7 +210,7 @@ namespace CSNewsletter
                 try
                 {
                     dataReader.Read();
-                    _newsletterID = Convert.ToInt16 (dataReader["NewsletterID"]);
+                    _newsletterID = Convert.ToInt16(dataReader["NewsletterID"]);
                     _iD = dataReader["ID"].ToString();
                     _title = dataReader["Title"].ToString();
                     _imageName = dataReader["ImageName"].ToString();
@@ -284,5 +299,7 @@ namespace CSNewsletter
         {
             return Database.Execute(string.Format("DELETE FROM NewsletterArticle WHERE NewsletterID = {0} AND ID = '{1}'", _newsletterID, _iD), CommandType.Text, string.Format("Error al eliminar los datos del Artículo.{0}{0}NewsletterID: {1}{0}ID: {2}", Environment.NewLine, _newsletterID, _iD));
         }
+
+        #endregion Methods
     }
 }

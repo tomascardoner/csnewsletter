@@ -170,12 +170,12 @@ namespace CSNewsletter
             {
                 mArticle.NewsletterID = Convert.ToInt16(comboboxNewsletter.SelectedValue);
             }
-            mArticle.ID = textboxArticleID.Text.Trim();
-            mArticle.Title = textboxTitle.Text.Trim();
-            mArticle.ImageName = textboxImageName.Text.Trim();
-            mArticle.Body = textboxBody.Text.Trim();
+            mArticle.ID = textboxArticleID.Text;
+            mArticle.Title = textboxTitle.Text;
+            mArticle.ImageName = textboxImageName.Text;
+            mArticle.Body = textboxBody.Text;
             mArticle.PhotoGalleryUse = checkboxPhotoGalleryUse.Checked;
-            mArticle.PhotoGalleryID = textboxPhotoGalleryID.Text.Trim();
+            mArticle.PhotoGalleryID = textboxPhotoGalleryID.Text;
             mArticle.OrderNumber = Convert.ToByte(updownOrderNumber.Value);
 
             if (mArticle.Update())
