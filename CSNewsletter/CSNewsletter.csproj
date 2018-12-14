@@ -54,27 +54,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\..\Users\Tomas\Dropbox\Cardoner Sistemas\Framework\CSharp\Constants.cs">
+    <Compile Include="C:\Data\Cardoner Sistemas\Development\framework-csharp\Constants.cs">
       <Link>Constants.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\..\Users\Tomas\Dropbox\Cardoner Sistemas\Framework\CSharp\Database_ADO_OleDb.cs">
+    <Compile Include="C:\Data\Cardoner Sistemas\Development\framework-csharp\Database_ADO_OleDb.cs">
       <Link>Database_ADO_OleDb.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\..\Users\Tomas\Dropbox\Cardoner Sistemas\Framework\CSharp\Encrypt_TripleDES.cs">
+    <Compile Include="C:\Data\Cardoner Sistemas\Development\framework-csharp\Encrypt_TripleDES.cs">
       <Link>Encrypt_TripleDES.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\..\Users\Tomas\Dropbox\Cardoner Sistemas\Framework\CSharp\Error.cs">
+    <Compile Include="C:\Data\Cardoner Sistemas\Development\framework-csharp\Error.cs">
       <Link>Error.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\..\Users\Tomas\Dropbox\Cardoner Sistemas\Framework\CSharp\ErrorMessageBox.cs">
+    <Compile Include="C:\Data\Cardoner Sistemas\Development\framework-csharp\ErrorMessageBox.cs">
       <Link>ErrorMessageBox.cs</Link>
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="..\..\..\..\..\Users\Tomas\Dropbox\Cardoner Sistemas\Framework\CSharp\ErrorMessageBox.designer.cs">
+    <Compile Include="C:\Data\Cardoner Sistemas\Development\framework-csharp\ErrorMessageBox.designer.cs">
       <Link>ErrorMessageBox.designer.cs</Link>
       <DependentUpon>ErrorMessageBox.cs</DependentUpon>
     </Compile>
-    <Compile Include="..\..\..\..\..\Users\Tomas\Dropbox\Cardoner Sistemas\Framework\CSharp\My.cs">
+    <Compile Include="C:\Data\Cardoner Sistemas\Development\framework-csharp\My.cs">
       <Link>My.cs</Link>
     </Compile>
     <Compile Include="Article.cs" />
@@ -87,7 +87,7 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="..\..\..\..\..\Users\Tomas\Dropbox\Cardoner Sistemas\Framework\CSharp\ErrorMessageBox.resx">
+    <EmbeddedResource Include="C:\Data\Cardoner Sistemas\Development\framework-csharp\ErrorMessageBox.resx">
       <Link>ErrorMessageBox.resx</Link>
       <DependentUpon>ErrorMessageBox.cs</DependentUpon>
     </EmbeddedResource>
